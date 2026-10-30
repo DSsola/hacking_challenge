@@ -13,12 +13,43 @@ const xpNeed=()=>100+Math.floor(s.xp/150)*50;
 const rank=()=>s.xp>=2400?"ROOT ARCHITECT":s.xp>=1400?"VOID WALKER":s.xp>=850?"PHANTOM":s.xp>=450?"ELITE":s.xp>=150?"OPERATOR":"ROOKIE";
 
 // 게임 화폐는 실제 저장값을 Byte로 두고, 일정량을 모으면 상위 등급으로 표기한다.
-function money(n){
-  const tiers=[["Byte",1],["Bit",1000],["Kilobyte",1000000],["Megabyte",1000000000],["Gigabyte",1000000000000]];
-  let t=tiers[0];
-  for(const item of tiers){if(n>=item[1])t=item;else break;}
-  const value=n/t[1];
-  return (value>=100?Math.floor(value):value>=10?value.toFixed(1):value.toFixed(2)).replace(/\.?0+$/,"")+" "+t[0];
+
+function money(n) {
+  const tiers = [
+    ["Byte", 1],
+    ["Bit", 1000],
+    ["Kilobyte", 1000000],
+    ["Megabyte", 1000000000],
+    ["Gigabyte", 1000000000000]
+  ];
+
+  let t = tiers[0];
+
+  for (const item of tiers) {
+    if (n >= item[1]) {
+      t = item;
+    } else {
+      break;
+    }
+  }
+
+  const value = n / t[1];
+
+  let shown;
+
+  if (value >= 100) {
+    shown = Math.floor(value).toString();
+  } else if (value >= 10) {
+    shown = value.toFixed(1);
+  } else {
+    shown = value.toFixed(2);
+  }
+
+  if (shown.includes(".")) {
+    shown = shown.replace(/0+$/, "").replace(/\.$/, "");
+  }
+
+  return shown + " " + t[0];
 }
 function persist(){try{localStorage.setItem("blackvoid_save_v2",JSON.stringify(s));$("saveState").textContent="SAVE SYNCED TO THIS BROWSER";}catch(e){$("saveState").textContent="SAVE UNAVAILABLE";}}
 function log(t,c=""){const d=document.createElement("div");d.className="line "+c;d.textContent=t;$("terminal").append(d);$("terminal").scrollTop=$("terminal").scrollHeight;}
