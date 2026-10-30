@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#050a08">
+<title>BLACK//VOID : DATA HEIST</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="rotate" class="rotate"><div class="rotate-card"><div class="rotate-icon">▰ ↻</div><h1>LANDSCAPE REQUIRED</h1><p>화면을 가로로 돌려주세요.</p><button id="rotateContinue">계속하기</button></div></div>
+<div id="app">
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">B//V</span><div><b>BLACK<span>//</span>VOID</b><small>DATA HEIST SIMULATION</small></div></div>
+  <div class="top-stats"><span class="online"><i></i> GITHUB OPS</span><span id="clock">00:00</span><button id="soundBtn" class="icon-btn" aria-label="사운드">♫</button><button id="fullBtn" class="icon-btn" aria-label="전체화면">⛶</button></div>
+</header>
+<main class="layout">
+  <aside class="sidebar">
+    <section class="panel operator">
+      <div class="panel-head">OPERATOR PROFILE <span>◈</span></div>
+      <div class="profile"><div class="avatar">G</div><div><small>CODENAME</small><strong id="codename">GHOST_01</strong><em id="rank">ROOKIE</em></div></div>
+      <div class="money"><span>DATA CURRENCY</span><b id="credits">250 Byte</b></div>
+      <div class="meter-label"><span>EXPERIENCE</span><span id="xpLabel">0 / 100</span></div><div class="meter"><i id="xpMeter"></i></div>
+      <div class="meter-label"><span>TRACE LEVEL</span><span id="traceLabel">0%</span></div><div class="meter trace"><i id="traceMeter"></i></div>
+      <div class="meter-label"><span>ENERGY</span><span id="energyLabel">100 / 100</span></div><div class="meter energy"><i id="energyMeter"></i></div>
+    </section>
+    <nav class="panel nav">
+      <div class="panel-head">MAINFRAME <span>⌘</span></div>
+      <button class="nav-btn active" data-page="terminal"><span>▣</span> 터미널 <kbd>01</kbd></button>
+      <button class="nav-btn" data-page="contracts"><span>◈</span> 작전 의뢰 <kbd>02</kbd></button>
+      <button class="nav-btn" data-page="network"><span>⌘</span> 가상 네트워크 <kbd>03</kbd></button>
+      <button class="nav-btn" data-page="lab"><span>⌗</span> 암호 연구소 <kbd>04</kbd></button>
+      <button class="nav-btn" data-page="market"><span>⬡</span> 암시장 <kbd>05</kbd></button>
+      <button class="nav-btn" data-page="profile"><span>▤</span> 기록 보관소 <kbd>06</kbd></button>
+    </nav>
+    <section class="panel side-note"><div class="panel-head">FIELD NOTE</div><p>실제 네트워크가 아닌 BLACK//VOID 내부의 가상 시스템을 침투하는 게임입니다.</p><div class="save-state"><i></i><span id="saveState">LOCAL SAVE READY</span></div></section>
+  </aside>
+  <section class="maincol">
+    <section class="panel stage">
+      <div class="stage-head"><div><small id="pageKicker">SYSTEM / TERMINAL</small><h1 id="pageTitle">COMMAND TERMINAL</h1></div><span class="tag">BUILD 5.2.0</span></div>
+      <div id="page-terminal" class="page active">
+        <div class="terminal-toolbar"><span>root@blackvoid:~ <b>●</b></span><span>ENCRYPTED SESSION</span><button id="clearBtn">CLEAR</button></div>
+        <div id="terminal" class="terminal-output" aria-live="polite"></div>
+        <form id="commandForm" class="command-line"><label>root@void:~$</label><input id="commandInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help 입력..." /><button>RUN ↵</button></form>
+        <div class="quick-actions"><button data-command="scan">⌘ QUICK SCAN</button><button data-command="status">◉ STATUS</button><button data-page="contracts">▣ CONTRACTS</button><button data-command="recover">＋ RECHARGE</button></div>
+      </div>
+      <div id="page-contracts" class="page"><div class="page-intro">의뢰를 선택하고 작전을 수행해. 난이도가 높을수록 보상도 커진다.</div><div id="contractList" class="content-grid"></div></div>
+      <div id="page-network" class="page"><div class="page-intro">가상 네트워크의 노드를 선택하고 보안 코드를 뚫어 데이터를 탈취해.</div><div id="networkMap" class="network-map"></div><div id="nodeInfo" class="node-info">노드를 선택하면 정보가 표시됩니다.</div></div>
+      <div id="page-lab" class="page"><div class="page-intro">암호를 해독해 보상을 획득해. 알파벳 치환 규칙을 파악하라.</div><div class="cipher-card"><div class="cipher-top"><span>CAESAR SHIFT / LEVEL 01</span><span id="puzzleCount">UNSOLVED</span></div><div id="cipherText" class="cipher-text">READY</div><div id="cipherHint" class="cipher-hint">새 암호를 생성해 작전을 시작하세요.</div><div class="cipher-input"><input id="cipherInput" placeholder="해독한 단어 입력" autocomplete="off"><button id="cipherSubmit">DECODE</button></div><div class="lab-actions"><button id="newCipher">새 암호 생성</button><button id="getHint">힌트 보기</button></div></div><div id="labResult" class="result-line"></div></div>
+      <div id="page-market" class="page"><div class="page-intro">작전으로 모은 데이터 화폐를 장비에 투자해. 장비는 영구 적용된다.</div><div id="upgradeList" class="content-grid"></div></div>
+      <div id="page-profile" class="page"><div class="profile-grid"><div class="profile-stat"><small>CODENAME</small><b id="profileName">GHOST_01</b></div><div class="profile-stat"><small>RANK</small><b id="profileRank">ROOKIE</b></div><div class="profile-stat"><small>OPERATIONS</small><b id="profileOps">0</b></div><div class="profile-stat"><small>TOTAL EARNED</small><b id="profileEarned">0 CR</b></div><div class="profile-stat"><small>DATA COLLECTED</small><b id="profileData">0 KB</b></div><div class="profile-stat"><small>PUZZLES SOLVED</small><b id="profileSolved">0</b></div></div><div class="profile-actions"><button id="renameBtn">코드네임 변경</button><button id="exportBtn">세이브 내보내기</button><button id="resetBtn" class="danger">진행 상황 초기화</button></div><p class="tiny-note">진행 상황은 이 브라우저에 저장됩니다. 브라우저 데이터 삭제 시 세이브가 사라질 수 있습니다.</p></div>
+    </section>
+    <section class="panel lower-panel"><div class="panel-head">MISSION FEED <span class="muted">LIVE OPERATION LOG</span></div><div id="eventFeed" class="event-feed"></div></section>
+  </section>
+  <aside class="rightbar">
+    <section class="panel telemetry"><div class="panel-head">LIVE TELEMETRY <span class="pulse">●</span></div><div class="telemetry-body"><div class="tele-row"><span>CPU LOAD</span><b id="cpuValue">18%</b></div><div class="meter"><i id="cpuMeter"></i></div><div class="tele-row"><span>MEMORY</span><b id="memValue">32%</b></div><div class="meter blue"><i id="memMeter"></i></div><div class="tele-row"><span>FIREWALL</span><b id="firewallValue">ACTIVE</b></div><div class="tele-row"><span>CONNECTION</span><b class="green">LOCAL</b></div></div></section>
+    <section class="panel objective"><div class="panel-head">CURRENT OBJECTIVE</div><div class="objective-body"><div class="objective-icon">⌖</div><b id="objectiveTitle">FIRST CONTACT</b><p id="objectiveDesc">터미널에서 help를 입력해 명령어를 확인하세요.</p><button id="objectiveBtn">터미널 열기 →</button></div></section>
+    <section class="panel tips"><div class="panel-head">OPERATOR TIPS</div><ul id="tipList"><li>scan으로 첫 크레딧을 모아봐.</li><li>TRACE가 100%가 되면 경보가 발생해.</li><li>암시장 장비는 영구 업그레이드야.</li></ul></section>
+  </aside>
+</main>
+<div id="toast" role="status"></div>
+<div id="modal" class="modal-backdrop"><div class="modal-card"><div class="panel-head">SECURITY CHECK <span>⚠</span></div><h2 id="modalTitle">ACCESS TRIAL</h2><p id="modalDesc">화면의 코드를 기억하고 입력하세요.</p><div id="modalCode" class="modal-code">0000</div><input id="modalInput" inputmode="numeric" placeholder="코드 입력"><div class="modal-buttons"><button id="modalSubmit">확인</button><button id="modalCancel" class="secondary">취소</button></div><p id="modalMessage" class="tiny-note"></p></div></div>
+<script src="js/data.js"></script><script src="js/game.js"></script><script src="js/ui.js"></script>
+</body></html>
